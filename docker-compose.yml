@@ -1,0 +1,61 @@
+version: "3.9"
+services:
+  app:
+    image: wolfmoon69/strikersoft-swarm-app
+    volumes:
+      - nginx:/usr/share/nginx/html
+    environment:
+      - nickname=InputName
+    ports:
+      - "3456:80"
+    depends_on:
+      - pgadmin
+
+  postgres:
+    image: postgres
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
+      PGDATA: /data/postgres
+    volumes:
+       - postgres:/data/postgres
+    ports:
+      - "5432:5432"
+    restart: unless-stopped
+  
+  pgadmin:
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL:-pgadmin4@pgadmin.org}
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD:-admin}
+      PGADMIN_CONFIG_SERVER_MODE: 'False'
+    volumes:
+       - pgadmin:/root/.pgadmin
+    depends_on:
+      - postgres
+    ports:
+      - "${PGADMIN_PORT:-5050}:80"
+    restart: unless-stopped
+
+  jenkins:
+    image: wolfmoon69/strikersoft-jenkins-test
+    volumes:
+      - jenkins-data:/var/jenkins_home
+      - jenkins-docker-certs:/certs/client:ro
+      - jenkins-log:/var/log/jenkins
+    expose:
+      - 8081
+    ports:
+      - 80:8080
+      - 50000:50000
+    environment:
+      - DOCKER_HOST=tcp://docker:2376
+      - DOCKER_CERT_PATH=/certs/client
+      - DOCKER_TLS_VERIFY=1
+volumes:
+  postgres:
+  pgadmin:
+  nginx:
+  jenkins-log:
+  jenkins-data:
+  jenkins-docker-certs:
