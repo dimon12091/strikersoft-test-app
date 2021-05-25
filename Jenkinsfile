@@ -1,5 +1,9 @@
 pipeline {
-
+    environment {
+    imagine = "wolfmoon69/testapp"
+    registryCredential = ‘dockerhub’
+    dockerImage = ‘’
+    }
     agent any
     stages {
       stage("SCM") {
@@ -15,9 +19,17 @@ pipeline {
         stage("Docker build") {
             steps{
                 script {
-                    dockerImage = docker.build jenkins-test + “$BUILD_NUMBER”
+                    dockerImage = docker.build imagine + “$BUILD_NUMBER”
                 }
             }
         }
+        stage(‘Push Image to Docker Hub ‘) {
+            steps{
+                script {
+                    docker.withRegistry( ‘’, registryCredential ) {
+                    dockerImage.push()
+                    dockerImage.push(‘latest’)
+            }}
+        }}
     }
 }
