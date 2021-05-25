@@ -19,6 +19,7 @@ pipeline {
       stage('Fire Up docker-compose') {
         steps {
             sh "ls"
+            sh "pwd"
             step([$class: 'DockerComposeBuilder', dockerComposeFile: './docker-compose', option: [$class: 'StartAllServices'], useCustomDockerComposeFile: true])
         }
       }
