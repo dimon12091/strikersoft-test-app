@@ -16,10 +16,9 @@ pipeline {
         }
 
         stage("Docker build") {
-
             steps{
                 script {
-                    sh "docker login -u username -p dimon12091"
+                    sh "ls"
                     dockerImage = docker.build("wolfmoon69/bob")
                 }
             }
