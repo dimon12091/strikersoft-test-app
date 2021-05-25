@@ -22,6 +22,7 @@ pipeline {
                 dir ("jenkins-dockerfile") {
                     sh "ls"
                     def dockerImage = docker.build("wolfmoon69/test-to-test")
+                }
             }
          }
       }
@@ -33,5 +34,5 @@ pipeline {
                     dockerImage.push(‘latest’)
                 }}
             }}
-        }
- }
+
+}
