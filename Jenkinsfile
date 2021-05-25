@@ -1,8 +1,8 @@
 pipeline {
     environment {
-    imagine = "wolfmoon69/testapp"
+    imagine = ‘wolfmoon69/testapp‘
     registryCredential = ‘dockerhub’
-    dockerImage = ‘’
+    dockerImage = ‘ ’
     }
     agent any
     stages {
