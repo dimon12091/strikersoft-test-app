@@ -1,5 +1,6 @@
 pipeline {
     environment {
+        imagename = "yenigul/hacicenkins"
         registryCredential = 'dockerhub'
         dockerImage = ''
     }
@@ -19,7 +20,7 @@ pipeline {
             steps{
                 script {
                     sh "ls"
-                    dockerImage = docker.build("wolfmoon69/bob")
+                    dockerImage = docker.build imagename
                 }
             }
         }
