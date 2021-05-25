@@ -20,6 +20,7 @@ pipeline {
         steps {
             sh "ls"
             step([$class: 'DockerComposeBuilder', dockerComposeFile: 'docker-compose.yml', option: [$class: 'StartAllServices'], useCustomDockerComposeFile: false])
+        }
       }
     }
 }
