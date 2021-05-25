@@ -1,8 +1,8 @@
 pipeline {
     environment {
-    imagine = ‘wolfmoon69/testapp‘
+    registry =
     registryCredential = ‘dockerhub’
-    dockerImage = ‘ ’
+    dockerImage = ‘’
     }
     agent any
     stages {
@@ -19,7 +19,7 @@ pipeline {
         stage("Docker build") {
             steps{
                 script {
-                    dockerImage = docker.build imagine + “$BUILD_NUMBER”
+                    dockerImage = docker.build("wolfmoon69/bob")
                 }
             }
         }
