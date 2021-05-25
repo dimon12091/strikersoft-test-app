@@ -19,10 +19,11 @@ pipeline {
       stage("Docker build") {
          steps{
             script {
-                dir ("jenkins-dockerfile") {
-                    sh "ls"
-                    def dockerImage = docker.build("wolfmoon69/test-to-test")
-                }
+
+                sh "ls"
+//                     def dockerImage = docker.build("wolfmoon69/test-to-test")
+                sh "docker-compose up -d"
+
             }
          }
       }
