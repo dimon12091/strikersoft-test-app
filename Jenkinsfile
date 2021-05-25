@@ -16,24 +16,10 @@ pipeline {
             }
         }
 
-      stage("Docker build") {
-         steps{
-            script {
-
-                sh "ls"
-//                     def dockerImage = docker.build("wolfmoon69/test-to-test")
-                sh "docker-compose up -d"
-
-            }
-         }
+      stage('Fire Up docker-compose') {
+        steps {
+            sh "ls"
+            step([$class: 'DockerComposeBuilder', dockerComposeFile: 'docker-compose.yml', option: [$class: 'StartAllServices'], useCustomDockerComposeFile: false])
       }
-      stage("Push Image to Docker Hub") {
-            steps{
-                script {
-                    docker.withRegistry( ‘’, registryCredential ) {
-                    dockerImage.push()
-                    dockerImage.push(‘latest’)
-                }}
-            }}
     }
 }
