@@ -19,7 +19,7 @@ pipeline {
       stage('Fire Up docker-compose') {
         steps {
             sh "ls"
-            step([$class: 'DockerComposeBuilder', dockerComposeFile: 'docker-compose.yml', option: [$class: 'StartAllServices'], useCustomDockerComposeFile: false])
+            step([$class: 'DockerComposeBuilder', dockerComposeFile: 'docker-compose.yml', option: [$class: 'StartAllServices'], useCustomDockerComposeFile: true])
         }
       }
     }
