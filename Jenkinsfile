@@ -18,8 +18,8 @@ pipeline {
 
       stage('Fire Up docker-compose') {
         steps {
-            sh "sudo docker-compose build"
-//             step([$class: 'DockerComposeBuilder', dockerComposeFile: 'docker-compose.yml', option: [$class: 'StartAllServices'], useCustomDockerComposeFile: false])
+//             sh "sudo docker-compose build"
+            step([$class: 'DockerComposeBuilder', dockerComposeFile: 'docker-compose.yml', option: [$class: 'StartAllServices'], useCustomDockerComposeFile: true])
 //                 sh 'docker-compose up -d volume && sleep 5'
 //                 sh 'docker-compose up -d config-seed && sleep 60'
 //                 sh 'docker-compose up -d mongo && sleep 10'
