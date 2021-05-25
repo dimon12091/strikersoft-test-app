@@ -15,7 +15,7 @@ pipeline {
         stage("Docker build") {
             steps{
                 script {
-                    dockerImage = docker.build jenkins-test + “:$BUILD_NUMBER”
+                    dockerImage = docker.build jenkins-test + “$BUILD_NUMBER”
                 }
             }
         }
