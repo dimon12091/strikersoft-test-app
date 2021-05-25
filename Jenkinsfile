@@ -20,7 +20,7 @@ pipeline {
         steps {
             sh "ls"
             sh "pwd"
-            step([$class: 'DockerComposeBuilder', dockerComposeFile: './docker-compose', option: [$class: 'StartAllServices'], useCustomDockerComposeFile: true])
+            step([$class: 'DockerComposeBuilder', dockerComposeFile: 'docker-compose.yml', option: [$class: 'StartAllServices'], useCustomDockerComposeFile: false])
         }
       }
     }
